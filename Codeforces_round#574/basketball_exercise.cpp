@@ -62,6 +62,6 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
 int32_t main(){
-    
+    int n;cin>>n;
     return 0;
 }
