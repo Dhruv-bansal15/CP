@@ -1,0 +1,20 @@
+{
+    "files.associations": {
+        "algorithm": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "iostream": "cpp",
+        "map": "cpp",
+        "random": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "xstring": "cpp",
+        "string": "cpp",
+        "bitset": "cpp",
+        "chrono": "cpp",
+        "xhash": "cpp",
+        "xtree": "cpp",
+        "xutility": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}
