@@ -61,23 +61,34 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
+int common_part(string X, string Y, int n, int m)
+{
+    int dp[n + 1][m + 1];
+    int result = 0;
+    for (int i = 0; i <= n; i++)
+    {
+        for (int j = 0; j <= m; j++)
+        {
+            if (i == 0 || j == 0)
+                dp[i][j] = 0;
+ 
+            else if (X[i - 1] == Y[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1] + 1;
+                result = max(result, dp[i][j]);
+            }
+            else
+                dp[i][j] = 0;
+        }
+    }
+    return result;
+}
 int32_t main(){
-    int n;cin>>n;
-    vi arr1,arr2;
-    vector<vi> dp(n,vector<int>(2));
-    looper(i,0,n){
-        int x;cin>>x;arr1.pb(x);
+    tester{
+        string s1,s2;cin>>s1>>s2;
+        int n=s1.size(),m=s2.size();
+        int common_length = common_part(s1,s2,n,m);
+        int ans = n + m - 2*(common_length);
+        cout<<ans<<endl;
     }
-    looper(i,0,n){
-        int x;cin>>x;arr2.pb(x);
-    }
-    dp[0][0]=arr1[0];
-    dp[0][1]=arr2[0];
-    looper(i,1,n){
-        dp[i][0]=max(dp[i-1][0],arr1[i] + dp[i-1][1]);
-        dp[i][1]=max(dp[i-1][1],arr2[i] + dp[i-1][0]);
-    }
-    int ans= max(dp[n-1][0],dp[n-1][1]);
-    cout<<ans;
     return 0;
 }

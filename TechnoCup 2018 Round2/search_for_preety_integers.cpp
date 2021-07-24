@@ -62,22 +62,33 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
 int32_t main(){
-    int n;cin>>n;
-    vi arr1,arr2;
-    vector<vi> dp(n,vector<int>(2));
+    int n,m;cin>>n>>m;
+    int left=INT64_MAX,right=INT64_MAX;
+    map<int,int> freq1,freq2;
     looper(i,0,n){
-        int x;cin>>x;arr1.pb(x);
+        int x;cin>>x;
+        freq1[x]=1;
+        if(x<left) left=x;
+    }   
+    looper(i,0,m){
+        int x;cin>>x;freq2[x]=1;
+        if(x<right) right=x;
+    }  
+    looper(i,1,10){
+        if(freq2[i]==1 & freq1[i]==1){
+            cout<<i;
+            return 0;
+        }
     }
-    looper(i,0,n){
-        int x;cin>>x;arr2.pb(x);
+    if(left==right){
+        cout<<left;
+    }else{
+        if(left<right){
+            cout<<left<<right;
+        }else{
+            cout<<right<<left;
+        }
     }
-    dp[0][0]=arr1[0];
-    dp[0][1]=arr2[0];
-    looper(i,1,n){
-        dp[i][0]=max(dp[i-1][0],arr1[i] + dp[i-1][1]);
-        dp[i][1]=max(dp[i-1][1],arr2[i] + dp[i-1][0]);
-    }
-    int ans= max(dp[n-1][0],dp[n-1][1]);
-    cout<<ans;
+    
     return 0;
 }

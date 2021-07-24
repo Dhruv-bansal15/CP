@@ -62,22 +62,20 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
 int32_t main(){
-    int n;cin>>n;
-    vi arr1,arr2;
-    vector<vi> dp(n,vector<int>(2));
+    int n,k;cin>>n>>k;
+    int maxele=INT64_MIN,minele=INT64_MAX;
+    vi arr;
     looper(i,0,n){
-        int x;cin>>x;arr1.pb(x);
+        int x;cin>>x;arr.pb(x);
+        maxele=max(maxele,x);minele=min(minele,x);
+    }   
+    if(k==1){
+        cout<<minele;
+    }else if(k==2){
+        maxele = max(arr[0],arr[n-1]);
+        cout<<maxele;
+    }else{
+        cout<<maxele;
     }
-    looper(i,0,n){
-        int x;cin>>x;arr2.pb(x);
-    }
-    dp[0][0]=arr1[0];
-    dp[0][1]=arr2[0];
-    looper(i,1,n){
-        dp[i][0]=max(dp[i-1][0],arr1[i] + dp[i-1][1]);
-        dp[i][1]=max(dp[i-1][1],arr2[i] + dp[i-1][0]);
-    }
-    int ans= max(dp[n-1][0],dp[n-1][1]);
-    cout<<ans;
     return 0;
 }

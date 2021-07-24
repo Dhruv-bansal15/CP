@@ -62,22 +62,32 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
 int32_t main(){
-    int n;cin>>n;
-    vi arr1,arr2;
-    vector<vi> dp(n,vector<int>(2));
-    looper(i,0,n){
-        int x;cin>>x;arr1.pb(x);
-    }
-    looper(i,0,n){
-        int x;cin>>x;arr2.pb(x);
-    }
-    dp[0][0]=arr1[0];
-    dp[0][1]=arr2[0];
-    looper(i,1,n){
-        dp[i][0]=max(dp[i-1][0],arr1[i] + dp[i-1][1]);
-        dp[i][1]=max(dp[i-1][1],arr2[i] + dp[i-1][0]);
-    }
-    int ans= max(dp[n-1][0],dp[n-1][1]);
-    cout<<ans;
+    tester{
+        int n;cin>>n;
+        // vi arr;
+        int count=n;
+        map<int,int> freq;
+        priority_queue<pii> order_wise;
+        looper(i,0,n){
+            int x;cin>>x;
+            freq[x]++;
+        }
+        for(auto i:freq){
+            int a=i.ff,b=i.ss;
+            order_wise.push({b,a});
+        }
+        while(order_wise.size()>=2){
+            pii pehla = order_wise.top();order_wise.pop();
+            pii doosra = order_wise.top();order_wise.pop();
+            pehla.ff-=1;doosra.ff-=1;count-=2;
+            if(pehla.ff>=1){
+                order_wise.push(pehla);
+            }
+            if(doosra.ff>=1){
+                order_wise.push(doosra);
+            }
+        }
+        cout<<count<<endl;
+    }   
     return 0;
 }

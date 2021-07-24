@@ -62,22 +62,18 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
 int32_t main(){
-    int n;cin>>n;
-    vi arr1,arr2;
-    vector<vi> dp(n,vector<int>(2));
-    looper(i,0,n){
-        int x;cin>>x;arr1.pb(x);
-    }
-    looper(i,0,n){
-        int x;cin>>x;arr2.pb(x);
-    }
-    dp[0][0]=arr1[0];
-    dp[0][1]=arr2[0];
-    looper(i,1,n){
-        dp[i][0]=max(dp[i-1][0],arr1[i] + dp[i-1][1]);
-        dp[i][1]=max(dp[i-1][1],arr2[i] + dp[i-1][0]);
-    }
-    int ans= max(dp[n-1][0],dp[n-1][1]);
-    cout<<ans;
+    tester{
+        int n;cin>>n;
+        int pakka = n/3;
+        int value = pakka*3;
+        int left = n%3;
+        if(n%3==2){
+            cout<<pakka<<" "<<pakka+1<<endl;
+        }else if(n%3==1){
+            cout<<pakka+1<<" "<<pakka<<endl;
+        }else{
+            cout<<pakka<<" "<<pakka<<endl;
+        }
+    }   
     return 0;
 }
