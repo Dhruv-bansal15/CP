@@ -58,8 +58,44 @@ int nCr(int n,int r){
     return fact(n)/ (fact(r)*fact(n-r));
 }
     
+bool compare(pair<int,int> &one, pair<int,int> &two){
+    return one.second < two.second;
+}
+pqmax arr;
+void printDivisors(int n)
+{
+    // Note that this loop runs till square root
+    for (int i=1; i<=sqrt(n); i++)
+    {
+        if (n%i == 0)
+        {
+            // If divisors are equal, print only one
+            if (n/i == i)
+                arr.push(i);
+ 
+            else{
+                arr.push(i);arr.push(n/i);
+            }
+        }
+    }
+}
+bool divBySq(int x){
+	int a = floor(sqrt(x));
+	for(int i = 2; i < a + 1 ;i++){
+		if(x % (i*i) == 0){
+			return false;
+		}
+	}
+	return true;
+}
 int32_t main(){
     int n;cin>>n;
-       
+    printDivisors(n);
+    while(arr.size()){
+        int x = arr.top();arr.pop();
+        if(divBySq(x)==true){
+            cout<<x;break;
+        }
+    }
     return 0;
 }

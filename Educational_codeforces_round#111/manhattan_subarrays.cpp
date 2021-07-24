@@ -57,32 +57,34 @@ int fact(int n){
 int nCr(int n,int r){
     return fact(n)/ (fact(r)*fact(n-r));
 }
-int fun(string arr,int n){
-    bool zero=false,one=false;
-    int count=0;
-    looper(i,0,n){
-        char x=arr[i];
-        if(x=='1' & one==false){
-            one =true;zero=false;
-            count++;
-        }else if(x=='0' & zero==false){
-            zero=true;count++;one=false;
-        }
-    }
-    return count;
+    
+bool compare(pair<int,int> &one, pair<int,int> &two){
+    return one.second < two.second;
 }
 int32_t main(){
     tester{
-        int n,a,b;cin>>n>>a>>b;
-        string s;cin>>s;
-        if(b>=0){
-            cout<<n*a + n*b<<endl;
-        }else{
-            int x = fun(s,n);
-            int occurences = x/2 + 1;
-            cout<<n*a + occurences*b<<endl;
+        int n;cin>>n;
+        vi arr;arr.pb(-1);
+        looper(i,0,n){
+            int x;cin>>x;arr.pb(x);
         }
+        int result = 2*n-1;
+        looper(i,3,n+1){
+            int c=arr[i],b=arr[i-1],a=arr[i-2];
+            if(!((b>=a & c>=b)|(b<=a & c<=b))){
+                result++;
+            }
+        }
+        looper(i,4,n+1){
+            int d=arr[i],c=arr[i-1],b=arr[i-2],a=arr[i-3];
+            if(!((b>=a & c>=b)|(b<=a & c<=b)|(c>=b & d>=c)|(c<=b & d<=c)|(c>=a & d>=c)|(c<=a & d<=c)|(b>=a & d>=b)|(b<=a & d<=b))){
+                result++;
+            }
+        }
+         
 
+
+        cout<<result<<endl;
     }   
     return 0;
 }
