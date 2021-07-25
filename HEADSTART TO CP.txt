@@ -1,0 +1,45 @@
+HEADSTART TO CP
+
+Q1) Why should one do CP?
+-> For fun
+-> It builds good problem solving skills
+-> CP is a good brain exercise
+-> You get recognition in the CP community
+-> Added benefit in Software Engineering Interviews
+
+Q2) How to start?
+-> start participating in contests right away without waiting to learn all the data sturctures/algorithms
+-> the more practical applications you do the more you learn
+-> give more short contests (less time required)
+-> you learn more things in a short time
+-> long challenges are good for learning new concepts
+-> give 3-4 short contests per week (20 hours) + 30 hours for solutions total 50 hours
+
+Q3) What is the minimum requirement for competitive programming?
+-> you know any one programming language (C/C++, Python, Java)
+-> Initial problems are cake walk to boost your confidence 
+
+Q4) Which you language should you start with?
+-> stick with whichever you already know 
+-> shift to cpp slowly
+
+order in which to learn stuff:
+*recursion
+*backtracking
+*stack/queue/ll learn STL on the go
+*hash map
+*trees
+*heaps
+*trie
+*segment trees and graphs
+*Dynamic programming
+
+
+sample question:
+there is a frog who jumps on stones
+there are n stones (numbered from 1 to n)
+from any ith stone, the frog can jump to i+1 th stone or i+2 th stone 
+The cost of making a jump from ith stone to jth stone is |hi-hj| where hi is the height of the ith stone
+find the minimum cost to reach to the nth stone starting from the first, heights of all the stones are given
+
+
