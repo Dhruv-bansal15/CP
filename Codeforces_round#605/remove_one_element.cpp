@@ -62,31 +62,30 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
 int32_t main(){
-    int n,k;cin>>n>>k;
-    string s;cin>>s;
-    map<int,int> freq;
-    looper(i,0,k){
-        char aa;cin>>aa;
-        freq[aa - 'a']=1;
-    }
-    vector<int> arr;
-    int count=0;
-    looper(i,0,s.size()){
-        char aa = s[i];
-        if(freq[aa-'a']==1){
-            count++;
-        }else{
-            if(count>0){
-                arr.pb(count);count=0;
-            }
+    int n;cin>>n;
+    vi arr,left(n,1),right(n,1);
+    looper(i,0,n){
+        int x;cin>>x;arr.pb(x);
+    } 
+    int ans1=1;
+    for(int i=n-2;i>=0;i--){
+        if(arr[i]<arr[i+1]){
+            right[i]=right[i+1]+1;
+            ans1=max(ans1,right[i]);
         }
     }
-    if(count) {arr.pb(count);}
-    count=0;
-    for(int i:arr){
-        count+= ((i)*(i+1))/2;
+    looper(i,1,n){
+        if(arr[i]>arr[i-1]){
+            left[i]=left[i-1]+1;
+            ans1=max(ans1,left[i]);
+        }
     }
-    cout<<count;
-    
+    looper(i,0,n-2){
+        if(arr[i]<arr[i+2]){
+            ans1=max(ans1,left[i]+right[i+2]);
+        }
+    }
+    cout<<ans1;
+
     return 0;
 }

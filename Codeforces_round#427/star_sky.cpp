@@ -21,7 +21,6 @@
 #include <functional>
 #include <numeric>
 using namespace std;
-#define int long long 
 #define vi vector<int>
 #define fastIO ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 #define pii pair<int,int>
@@ -61,32 +60,33 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
+int n,q,c;
+int dp[11][101][101];
 int32_t main(){
-    int n,k;cin>>n>>k;
-    string s;cin>>s;
-    map<int,int> freq;
-    looper(i,0,k){
-        char aa;cin>>aa;
-        freq[aa - 'a']=1;
+    cin>>n>>q>>c;
+    // int dp[11][101][101];
+    looper(i,0,n){
+        int x, y, s;cin>>x>>y>>s;
+        dp[s][x][y]++;
     }
-    vector<int> arr;
-    int count=0;
-    looper(i,0,s.size()){
-        char aa = s[i];
-        if(freq[aa-'a']==1){
-            count++;
-        }else{
-            if(count>0){
-                arr.pb(count);count=0;
+    
+    looper(p,0,c+1) {
+        looper(i,1,101) {
+            looper(j,1,101){
+                dp[p][i][j] += dp[p][i - 1][j] + dp[p][i][j - 1] - dp[p][i - 1][j - 1];
             }
         }
     }
-    if(count) {arr.pb(count);}
-    count=0;
-    for(int i:arr){
-        count+= ((i)*(i+1))/2;
-    }
-    cout<<count;
     
+    looper(i,0,q){
+        int t, x1, y1, x2, y2;cin>>t>>x1>>y1>>x2>>y2;
+        int ans = 0;
+        looper(p,0,c+1){
+            int init_value = (p + t) % (c + 1);
+            int huehue = dp[p][x2][y2] - dp[p][x1 - 1][y2] - dp[p][x2][y1 - 1] + dp[p][x1 - 1][y1 - 1];
+            ans += init_value*huehue;
+        }
+        cout<<ans<<endl;
+    }  
     return 0;
 }
