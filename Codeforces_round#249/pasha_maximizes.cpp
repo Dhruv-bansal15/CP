@@ -61,41 +61,44 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
-const int inf=1e9 +10;int min_ele;
-int n;
 int32_t main(){
-    tester{
-        cin>>n;
-        min_ele=inf;
-        vi arr;int cnt=0;
-        looper(i,0,n){
-            int x;cin>>x;
-            if(x<=0) {cnt++;arr.pb(x);}
-            if(x>0){
-                min_ele=min(min_ele,x);
-            }
-        }
-        sort(all(arr));
-        bool done=true;
-        if(!(min_ele<inf)){
-            cout<<cnt<<endl;
-        }else{
-            looper(i,1,arr.size()){
-                if(arr[i]<=0){
-                    if(arr[i]-arr[i-1]>=min_ele){
-                        continue;
-                    }else{
-                        done=false;
-                        break;
-                    }
-                }else{
-                    break;
-                }
-            }
-            if(done==true) cnt++;
-            cout<<cnt<<endl;
-        }
-
+    int n,k;cin>>n>>k;
+    if(k==0){
+        cout<<n;
+        return 0;
+    }
+    vi arr;
+    while(n!=0){
+        int digit=n%10;arr.pb(digit);n/=10;
     }   
+    vi new_arr;
+    for(int i=arr.size()-1;i>=0;i--){
+        new_arr.pb(arr[i]);
+    }
+    int sz= new_arr.size();
+    looper(i,0,sz-1){
+        if(k==0){
+            break;
+        }
+        int j=i+1;
+        int curr= -1,value=INT64_MIN;
+        while(j<=i+k & j<sz){
+            if(value<new_arr[j]){
+                curr=j;value=new_arr[j];
+            }
+            j++;
+        }
+        if(new_arr[i]<new_arr[curr]){
+            k-= curr - i;
+            for(int j=curr;j>i;j--){
+                int temp = new_arr[j-1];
+                new_arr[j-1]=new_arr[j];new_arr[j]=temp;
+
+            }
+        }
+    }
+    for(int i:new_arr){
+        cout<<i;
+    }
     return 0;
 }

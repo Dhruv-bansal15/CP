@@ -61,41 +61,58 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
-const int inf=1e9 +10;int min_ele;
-int n;
+bool good_passcode(string s){
+    int a=0,b=0,c=0;
+    for(char i:s){
+        if(islower(i)){
+            a=1;
+        }else if(isupper(i)){
+            b=2;
+        }else if(isdigit(i)){
+            c=3;
+        }
+    }
+    if(a+b+c==6){
+        return true;
+    }else {
+        return false;
+    }
+}
 int32_t main(){
     tester{
-        cin>>n;
-        min_ele=inf;
-        vi arr;int cnt=0;
-        looper(i,0,n){
-            int x;cin>>x;
-            if(x<=0) {cnt++;arr.pb(x);}
-            if(x>0){
-                min_ele=min(min_ele,x);
-            }
-        }
-        sort(all(arr));
-        bool done=true;
-        if(!(min_ele<inf)){
-            cout<<cnt<<endl;
+        string s;cin>>s;
+        if(good_passcode(s)){
+            cout<<s<<endl;
         }else{
-            looper(i,1,arr.size()){
-                if(arr[i]<=0){
-                    if(arr[i]-arr[i-1]>=min_ele){
-                        continue;
-                    }else{
-                        done=false;
-                        break;
-                    }
-                }else{
-                    break;
+            bool flag=false;
+            looper(i,0,s.size()){
+                string temp=s;
+                temp[i]='d';
+                if(good_passcode(temp)){
+                    cout<<temp<<endl;flag=true;break;
                 }
-            }
-            if(done==true) cnt++;
-            cout<<cnt<<endl;
-        }
+                temp[i]='D';
+                if(good_passcode(temp)){
+                    cout<<temp<<endl;flag=true;break;
+                }
+                temp[i]='5';
+                if(good_passcode(temp)){
+                    cout<<temp<<endl;flag=true;break;
+                }
 
+            }
+            if(flag==false){
+                char aa=s[2];
+                if(islower(aa)){
+                    s[0]='D';s[1]='5';
+                }else if(isupper(aa)){
+                    s[0]='d';s[1]='5';
+                }else{
+                    s[0]='d';s[1]='D';
+                }
+                cout<<s<<endl;
+            }
+        }
     }   
     return 0;
 }

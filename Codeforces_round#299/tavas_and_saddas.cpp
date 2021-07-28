@@ -62,33 +62,17 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
 int32_t main(){
-    int n;cin>>n;
-    int temp =n;
-    // vi arr;
-    int count=0,cnt7=0;
-    while(n!=0){
-        int digit=n%10;count++;
-        if(digit==7) {cnt7++;}
-        n/=10;
-        // arr.pb(digit);
-    }
-    if(count==1){
-        if(temp==4){cout<<1;}
-        else {cout<<2;}
-    }else{
-        int ans=0;
-        ans+= pow(2,count-1);
-        while(cnt7>0){
-            if(cnt7>1){
-                cnt7--;
-                ans+= pow(2,cnt7);
-            }else{
-                ans++;
-                cnt7--;
-            }
-            
+    int n;cin >> n;
+	int curr_len = 0,result = 0;
+	while (n!=0) {
+		if (n % 10 == 7){
+			result += (1 << curr_len);
         }
-        cout<<ans+1;
+		curr_len++;n /= 10;
+	}
+	looper(i,1,curr_len){
+		result += (1 << i);
     }
+	cout << result + 1 << endl;
     return 0;
 }

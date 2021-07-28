@@ -61,41 +61,19 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
-const int inf=1e9 +10;int min_ele;
-int n;
 int32_t main(){
-    tester{
-        cin>>n;
-        min_ele=inf;
-        vi arr;int cnt=0;
-        looper(i,0,n){
-            int x;cin>>x;
-            if(x<=0) {cnt++;arr.pb(x);}
-            if(x>0){
-                min_ele=min(min_ele,x);
-            }
-        }
-        sort(all(arr));
-        bool done=true;
-        if(!(min_ele<inf)){
-            cout<<cnt<<endl;
+    int n,m;cin>>n>>m;
+    int count=1;
+    int curr_cap = m;
+    looper(i,0,n){
+        int x;cin>>x;
+        if(x<=curr_cap){
+            curr_cap-=x;
         }else{
-            looper(i,1,arr.size()){
-                if(arr[i]<=0){
-                    if(arr[i]-arr[i-1]>=min_ele){
-                        continue;
-                    }else{
-                        done=false;
-                        break;
-                    }
-                }else{
-                    break;
-                }
-            }
-            if(done==true) cnt++;
-            cout<<cnt<<endl;
+            curr_cap=m;count++;
+            curr_cap-=x;
         }
-
-    }   
+    }
+    cout<<count;
     return 0;
 }
