@@ -68,6 +68,14 @@ int32_t main(){
         int x;cin>>x;arr.pb(x);
     }
     sort(all(arr));
-    cout<<arr[n-1]-arr[0];
+    int ans=INT_MAX;
+    looper(i,0,m-n+1)
+    {
+        if(arr[i+n-1]-arr[i]<ans)
+        {
+            ans=arr[i+n-1]-arr[i];
+        }
+    }
+    cout<<ans<<endl;
     return 0;
 }

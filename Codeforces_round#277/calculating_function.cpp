@@ -64,14 +64,9 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
 int32_t main(){
     int n;cin>>n;
     if(n%2==0){
-        int total_terms = (n-2)/2 + 1;
-        int ans= total_terms*(2 + n);
-        ans/=2;ans-= (total_terms*(1+n-1))/2;
-        cout<<ans;
+        cout<<n/2;
     }else{
-        int total_terms= (n-1)/2 + 1;
-        int ans= total_terms*(1+n);ans/=2;ans*=(-1);ans+= ((total_terms-1)*(2+n-1))/2;
-        cout<<ans;
+        cout<<(n/2+1)*(-1);
     }
     return 0;
 }

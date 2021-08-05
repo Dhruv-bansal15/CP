@@ -65,7 +65,7 @@ int32_t main(){
     // cout<<gCd(1,3)<<endl;
     int a,b,c,d;cin>>a>>b>>c>>d;
     if((double)a/b == (double)c/d){
-        cout<<0;
+        cout<<"0/1";
     }else{
         if((double)a/b > (double)c/d){
             int num=a*d-b*c,den=a*d;
