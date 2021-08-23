@@ -60,6 +60,7 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
+
 int n,q,c;
 int dp[11][101][101];
 int32_t main(){
