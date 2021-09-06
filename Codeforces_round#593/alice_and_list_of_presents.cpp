@@ -63,8 +63,23 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
+int pw(int x, int n){
+    int curr = 1;
+    while(n){
+            if(n & 1){
+                curr = (curr*x)% mod;
+            }
+            x = (x*x)% mod;
+            n /= 2;
+    }
+    return curr;
+}
 int32_t main(){
-    int n,m;cin>>n>>m;
-       
+    int n,m;cin>>n>>m; 
+    // cout<<pw(2,8);
+    int curr = pw(2,m) - 1;
+    curr = pw(curr,n);
+    cout<<curr;
+
     return 0;
 }
