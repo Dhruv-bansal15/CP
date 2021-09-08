@@ -28,7 +28,6 @@ using namespace std;
 #define pii pair<int,int>
 #define pb push_back
 #define ff first
-#define tt third
 #define tester int t;cin>>t;while(t--)
 #define looper(a,b,c) for(int a=b;a<c;a++)
 #define ss second
@@ -60,84 +59,61 @@ int fact(int n){
 int nCr(int n,int r){
     return fact(n)/ (fact(r)*fact(n-r));
 }
+    
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
-class trio {
- public:
-	int first, second, third;
-	void print() {
-		cout<<first<<space<<second<<space<<third<<endl;
-	}
-};
-bool comp_trio(trio &a, trio &b) {
-	if (a.tt == b.tt) {
-		if (a.ss == b.ss)
-			return a.ff < b.ff;
-		return a.ss<b.ss;
-	}
-	return a.tt < b.tt;
+int fun(vi &arr,int x){
+    int curr=0;
+    if(arr[x]>arr[x+1]){
+        swap(arr[x],arr[x+1]);
+        curr=1;
+    }
+    return curr;
 }
-// class compare {
-//  public:
-// 	bool operator()(const pairi &a, const pairi &b) const {
-// 		if (a.ss == b.ss)
-// 			return a.ff < b.ff;
-// 		return a.ss < b.ss;
-// 	}
-// };
-void solve() {
-	int n,m;
-	cin>>n>>m;
-	vector<vi>arr(n,vi(m)),brr(n,vi(m,-1)),ans(n,vi(m,0));
-	vector<trio>b;
-	looper(i,0,n){
-		looper(j,0,m){
-			cin>>arr[i][j];
-			b.pb({i,j,arr[i][j]});
-		}
-	}
-	sort(all(b), comp_trio);
-	looper(i,0,m){
-		brr[b[i].ff][b[i].ss]=i;
-	}
-	looper(k,0,m) {
-		looper(i, 0, n) {
-			bool fl = 1;
-			looper(j, 0, m) {
-				if (brr[i][j] == k) {
-					fl = 0;
-					break;
-				}
-			}
+int32_t main(){
+    tester{
+        int n;cin>>n;
+        vi arr;arr.pb(-1);
+        looper(i,0,n){
+            int x;cin>>x;
+            arr.pb(x);
+        }
+        int cnt=0;
+        int ch=0;
+        int hihi=-1;
+        looper(i,1,n+1){
+            bool done=false;
+            hihi=i;
+            if(i%2==0){
+                for(int j=2;j<=n-1;j+=2){
+                    int temp = fun(arr,j);
+                    if(temp)
+                        done=true;
+                }
+            }else{
+                for(int j=1;j<=n-2;j+=2){
+                    int temp = fun(arr,j);
+                    if(temp){
+                        done=true;
+                    }
+                }
+            }
+            // looper(i,1,n+1){
+            //     cout<<arr[i]<<space;
+            // }
+            // cout<<endl;
+            if(done==true){
+                cnt++;ch=0;
+            }else if(ch==1) 
+                break;
+            else{
+                ch=1;
+            }
 
-			if (fl) {
-				looper(j, 0, m) {
-					if (brr[i][j] == -1) {
-						brr[i][j] = k;
-						break;
-					}
-				}
-			}
-		}
-	}
+        }
+        cout<<hihi<<endl;
 
-	looper(i,0,n){
-		looper(j,0,m){
-			ans[i][brr[i][j]] = arr[i][j];
-		}
-	}
-	looper(i,0,n) {
-
-		looper(j,0,m){
-			cout<<ans[i][j]<<space;
-		}
-		cout<<endl;
-	}
+    }   
+    return 0;
 }
-int32_t main() {
-	tester{
-		solve();
-	}
-}
-

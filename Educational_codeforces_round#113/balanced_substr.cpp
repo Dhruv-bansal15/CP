@@ -28,7 +28,6 @@ using namespace std;
 #define pii pair<int,int>
 #define pb push_back
 #define ff first
-#define tt third
 #define tester int t;cin>>t;while(t--)
 #define looper(a,b,c) for(int a=b;a<c;a++)
 #define ss second
@@ -60,84 +59,29 @@ int fact(int n){
 int nCr(int n,int r){
     return fact(n)/ (fact(r)*fact(n-r));
 }
+    
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
-class trio {
- public:
-	int first, second, third;
-	void print() {
-		cout<<first<<space<<second<<space<<third<<endl;
-	}
-};
-bool comp_trio(trio &a, trio &b) {
-	if (a.tt == b.tt) {
-		if (a.ss == b.ss)
-			return a.ff < b.ff;
-		return a.ss<b.ss;
-	}
-	return a.tt < b.tt;
+int32_t main(){
+    tester{
+        int n;cin>>n;
+        string s;cin>>s;
+        bool done =false;
+        looper(i,0,s.size()-1){
+            if(s[i]=='a' & s[i+1]=='b'){
+                cout<<i+1<<space<<i+2<<endl;
+                done=true;
+                break;
+            }else if(s[i]=='b' & s[i+1]=='a'){
+                cout<<i+1<<space<<i+2<<endl;
+                done=true;
+                break;
+            }
+        }
+        if(done==false){
+            cout<<-1<<space<<-1<<endl;
+        }
+    }
+    return 0;
 }
-// class compare {
-//  public:
-// 	bool operator()(const pairi &a, const pairi &b) const {
-// 		if (a.ss == b.ss)
-// 			return a.ff < b.ff;
-// 		return a.ss < b.ss;
-// 	}
-// };
-void solve() {
-	int n,m;
-	cin>>n>>m;
-	vector<vi>arr(n,vi(m)),brr(n,vi(m,-1)),ans(n,vi(m,0));
-	vector<trio>b;
-	looper(i,0,n){
-		looper(j,0,m){
-			cin>>arr[i][j];
-			b.pb({i,j,arr[i][j]});
-		}
-	}
-	sort(all(b), comp_trio);
-	looper(i,0,m){
-		brr[b[i].ff][b[i].ss]=i;
-	}
-	looper(k,0,m) {
-		looper(i, 0, n) {
-			bool fl = 1;
-			looper(j, 0, m) {
-				if (brr[i][j] == k) {
-					fl = 0;
-					break;
-				}
-			}
-
-			if (fl) {
-				looper(j, 0, m) {
-					if (brr[i][j] == -1) {
-						brr[i][j] = k;
-						break;
-					}
-				}
-			}
-		}
-	}
-
-	looper(i,0,n){
-		looper(j,0,m){
-			ans[i][brr[i][j]] = arr[i][j];
-		}
-	}
-	looper(i,0,n) {
-
-		looper(j,0,m){
-			cout<<ans[i][j]<<space;
-		}
-		cout<<endl;
-	}
-}
-int32_t main() {
-	tester{
-		solve();
-	}
-}
-
