@@ -67,7 +67,31 @@ int32_t main(){
     tester{
         int n;cin>>n;
         string s;cin>>s;
-        
+		int ff_occ = -1, ll_occ = -1, cnt = 0;
+		looper(i,0,n){
+			if (s[i]=='2'){
+				if (ff_occ==-1)
+                    ff_occ = i;
+				ll_occ = i;
+				cnt++;
+			}
+		}
+		if (cnt==0 | cnt>=3){
+			cout<<"YES"<<endl;
+			looper(i,0,n){
+				looper(j,0,n){
+					if(i==j)
+                        cout<<"X";
+					else if(s[i]=='1' | s[j]=='1')
+                        cout<<"=";
+					else if (i < j && (i != ff_occ || j != ll_occ) || i == ll_occ && j == ff_occ)
+                        cout<<"+";
+					else cout<<"-";
+				}
+				cout<<endl;
+			}
+		}
+		else printf("NO\n");
     }   
     return 0;
 }
