@@ -63,40 +63,38 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
+vi arr;
+void pre(){
+	looper(i,2,51){
+		int curr=0;
+		looper(j,2,i){
+			if(i%j==0)
+				curr=1;
+		}
+		if(curr==0){
+			arr.pb(i);
+			if(i<=7)
+				arr.pb(i*i);
+		}
+	}
+}
 int32_t main(){
-    int n,a;cin>>n>>a;
-    vi arr;arr.pb(-1);
-    looper(i,0,n){
-        int x;cin>>x;arr.pb(x);
+    pre();
+    // for(int i:arr){
+    //     cout<<i<<space;
+    // }
+    int cnt=0;
+	looper(i,0,arr.size()){
+		cout<<arr[i]<<endl;
+		fflush(stdout);
+		string s;
+		cin>>s;
+		if(s=="yes")
+			cnt++;
     }
-    int i=a-1,j=a+1;
-    int cnt= (arr[a]==1);
-    // 1 1 1 0 1 0
-    while(true){
-        if(i==0 & j==n+1){
-            break;
-        }
-        if(i==0){
-            while(j<=n){
-                if(arr[j]==1)
-                    cnt++;
-                j++;
-            }
-            break;
-        }else if(j==n+1){
-            while(i>0){
-                if(arr[i]==1)
-                    cnt++;
-                i--;
-            }
-            break;
-        }else{
-            if(arr[i]==1 & arr[j]==1){
-                cnt+=2;
-            }
-            i--,j++;
-        }
-    }
-    cout<<cnt;
+	if(cnt<=1)
+		cout<<"prime"<<endl;
+	else
+		cout<<"composite"<<endl;
     return 0;
 }
