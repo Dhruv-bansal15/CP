@@ -22,7 +22,7 @@
 #include <functional>
 #include <numeric>
 using namespace std;
-#define int long long 
+// #define int long long 
 #define vi vector<int>
 #define fastIO ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
 #define pii pair<int,int>
@@ -64,37 +64,11 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
 int32_t main(){
-    // m[1].pb(8);
-    // m[1].pb(-1);
-    // cout<<m[1][1]<<space<<m[1].size();
     tester{
-        int n;cin>>n;
-        map<int,vi> m;
-        bool done=false;
-        looper(i,0,n){
-            int x;cin>>x;
-            m[x].pb(i);
-            if(m[x].size()>=3){
-                done=true;
-            }
-        }
-        if(done){
-            cout<<"YES"<<endl;
-        }else{
-            for(auto i:m){
-                vi arr = i.ss;
-                int u = arr.size();
-                if(arr[u-1] - arr[0]>1){
-                    done=true;
-                }
-            }
-            if(done)
-                cout<<"YES"<<endl;
-            else 
-                cout<<"NO"<<endl;
-        }
-
+        int K;cin >> K;
+        int x = int(ceil(sqrt(K))),y = x - 1,diff = K - y * y;
+        int row = min(diff, x),col = x - max(diff - x, 0);
+        cout<<row<<space<<col<<endl;
     }   
     return 0;
 }
-

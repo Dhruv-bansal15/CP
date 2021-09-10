@@ -21,7 +21,11 @@
 #include <bitset>
 #include <functional>
 #include <numeric>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp> 
+#include <functional>
 using namespace std;
+using namespace __gnu_pbds; 
 #define int long long 
 #define vi vector<int>
 #define fastIO ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
@@ -45,6 +49,14 @@ using namespace std;
 #define looprev(i,a,b) for(int i=a;i>=(b);i--)
 #define logarr(arr,a,b) for(int z=(a);z<=(b);z++) std::cout<<(arr[z])<<space;std::cout<<std::endl;
 #define si set<int>
+
+template<typename T>
+using ordered_set = tree<
+T,
+null_type,
+less<T>,
+rb_tree_tag,
+tree_order_statistics_node_update>;
 int gCd(int a,int b){
     if(b==0)
         return a;
@@ -63,38 +75,22 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
+// typedef tree<int, null_type, less<int>, rb_tree_tag, 
+//             tree_order_statistics_node_update> 
+//     ordered_set;
 int32_t main(){
-    // m[1].pb(8);
-    // m[1].pb(-1);
-    // cout<<m[1][1]<<space<<m[1].size();
-    tester{
-        int n;cin>>n;
-        map<int,vi> m;
-        bool done=false;
-        looper(i,0,n){
-            int x;cin>>x;
-            m[x].pb(i);
-            if(m[x].size()>=3){
-                done=true;
-            }
-        }
-        if(done){
-            cout<<"YES"<<endl;
-        }else{
-            for(auto i:m){
-                vi arr = i.ss;
-                int u = arr.size();
-                if(arr[u-1] - arr[0]>1){
-                    done=true;
-                }
-            }
-            if(done)
-                cout<<"YES"<<endl;
-            else 
-                cout<<"NO"<<endl;
-        }
-
-    }   
+    ordered_set<pii> x;
+    int n;cin>>n;
+    vi a(n+1),b(n+1);
+	looper(i,1,n+1)
+		cin>>a[i];
+	looper(i,1,n+1)
+		cin>>b[i];
+	int ans = 0;
+	for(int i=n;i>0;i--){
+		ans += x.order_of_key({a[i] - b[i], i});
+		x.insert({b[i] - a[i], i});
+	}
+	cout<<ans;
     return 0;
 }
-
