@@ -66,7 +66,7 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
 int32_t main(){
     tester{
         int n,k;cin>>n>>k;
-        int ans = (k+1)/(n - 1);
+        int ans = (k-1)/(n - 1);
         cout <<k+ans<< endl;
     }   
     return 0;
