@@ -75,7 +75,7 @@ int32_t main(){
                 y++;
         }
         // cout<<x<<space<<y<<endl;
-        if(s.length()==y | (x==0 & y==0)){
+        if(y==s.length() | (x==s.length() & y==0)){
             cout<<s<<endl;
         }else{
             // cout<<"h";

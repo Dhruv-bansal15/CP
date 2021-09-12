@@ -63,29 +63,49 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
-vi arr(40000 + 100,0);
-void pre(int a,int b){
-    looper(i,1,a*b+1){
-        bool flag=false;
-        if((i%a)%b != (i%b)%a){
-            arr[i]=1;flag=true;
-        }
-        arr[i]= arr[i-1];
-        arr[i]+= (flag==true);
-    }
-}
 int32_t main(){
     tester{
-        int a,b,q;cin>>a>>b>>q;
-        // arr.clear();
-        pre(a,b);
-        while(q--){
-            int l,r;cin>>l>>r;
-            l--;
-            int temp1 = arr[a*b]*(l/(a*b)) + arr[l%(a*b)],temp2 =arr[a*b]*(r/(a*b)) + arr[r%(a*b)];
-            cout<< temp2 - temp1<<space;
+        int n;cin>>n;
+        int cnt=0;
+        string s1,s2;cin>>s1>>s2;
+        bool same1=false,same0=false;
+        int prev_index=-4;
+        looper(i,0,n){
+            if((s1[i]=='0' & s2[i]=='1') | (s1[i]=='1' & s2[i]=='0')){
+                cnt+=2;
+            }else if(s1[i]=='0' & s2[i]=='0'){
+                if(same1==true & prev_index==i-1){
+                    cnt+=2;
+                    same0=false,same1=false;
+                }else if(same1==true){
+                    same1=false;
+                    same0=true;
+                    prev_index=i;
+                }else if(same0==false){
+                    same0=true;
+                    prev_index=i;
+                }else{
+                    cnt++;
+                    prev_index=i;
+                }
+            }else if(s1[i]=='1' & s2[i]=='1'){
+                if(same0==true & prev_index==i-1){
+                    cnt+=2;
+                    same0=false,same1=false;
+                }else if(same0==true){
+                    same0=false;cnt++;
+                    same1=true;
+                    prev_index=i;
+                }else{
+                    same1=true;
+                    prev_index=i;
+                }
+            }
         }
-        cout<<endl;
-    }
+        if(same0==true){
+            cnt++;
+        }
+        cout<<cnt<<endl;
+    }   
     return 0;
 }

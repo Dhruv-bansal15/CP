@@ -63,29 +63,30 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
-vi arr(40000 + 100,0);
-void pre(int a,int b){
-    looper(i,1,a*b+1){
-        bool flag=false;
-        if((i%a)%b != (i%b)%a){
-            arr[i]=1;flag=true;
-        }
-        arr[i]= arr[i-1];
-        arr[i]+= (flag==true);
-    }
-}
 int32_t main(){
     tester{
-        int a,b,q;cin>>a>>b>>q;
-        // arr.clear();
-        pre(a,b);
-        while(q--){
-            int l,r;cin>>l>>r;
-            l--;
-            int temp1 = arr[a*b]*(l/(a*b)) + arr[l%(a*b)],temp2 =arr[a*b]*(r/(a*b)) + arr[r%(a*b)];
-            cout<< temp2 - temp1<<space;
+        string s;cin>>s;
+        int n=s.length();
+        int cnt=0;
+        bool curr=false;
+        looper(i,0,n){
+            if(s[i]=='0'){
+                if(curr==false){
+                    curr=true;
+                    cnt++;
+                }
+            }else{
+                curr=false;
+            }
         }
-        cout<<endl;
-    }
+        // cout<<cnt<<endl;
+        if(cnt==0){
+            cout<<0<<endl;
+        }else if(cnt==1){
+            cout<<1<<endl;
+        }else{
+            cout<<2<<endl;
+        }
+    }   
     return 0;
 }
