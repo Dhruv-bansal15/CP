@@ -63,24 +63,51 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
-
-int findlargestfactor(int n){
-    for(int i=2;i*i<=n;i++){
-        if(n%i==0){
-            return n/i;
-        }
-    }
-    return 1;
-}
-
+    
 int32_t main(){
     tester{
         int n;cin>>n;
-        if(n%2==0){
-            cout<<n/2<<" "<<n/2<<endl;
+        int a=-1,b=-1,c=-1;
+        vi arr1,arr2;
+        looper(i,0,n){
+            int x;cin>>x;
+            if(x==-1 && a==-1){
+                a=i;
+            }else if(x==0 & b==-1){
+                b=i;
+            }else if(x==1 & c==-1){
+                c=i;
+            }
+            arr1.pb(x);
+        }
+        looper(i,0,n){
+            int x;cin>>x;
+            arr2.pb(x);
+        }
+        bool done=true;
+        for(int i=n-1;i>=0;i--){
+            if(arr1[i]==arr2[i]){
+                continue;
+            }else if(arr1[i]<arr2[i]){
+                if(c!=-1 & c<i){
+                    continue;
+                }else{
+                    done=false;
+                    break;
+                }
+            }else if(arr1[i]>arr2[i]){
+                if(a!=-1 && a<i){
+                    continue;
+                }else{
+                    done=false;
+                    break;
+                }
+            }
+        }
+        if(done){
+            cout<<"YES"<<endl;
         }else{
-            int temp = findlargestfactor(n);
-            cout<<temp<<" "<<n-temp<<endl;
+            cout<<"NO"<<endl;
         }
     }   
     return 0;

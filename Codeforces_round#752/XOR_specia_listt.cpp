@@ -63,24 +63,25 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
-
-int findlargestfactor(int n){
-    for(int i=2;i*i<=n;i++){
-        if(n%i==0){
-            return n/i;
-        }
-    }
-    return 1;
-}
-
+    
 int32_t main(){
     tester{
         int n;cin>>n;
+        invi(n);
         if(n%2==0){
-            cout<<n/2<<" "<<n/2<<endl;
+            cout<<"YES"<<endl;
         }else{
-            int temp = findlargestfactor(n);
-            cout<<temp<<" "<<n-temp<<endl;
+            bool done=false;
+            looper(i,0,n-1){
+                if(arr[i]>=arr[i+1]){
+                    done=true;
+                    break;
+                }
+            }
+            if(done)
+                cout<<"YES"<<endl;
+            else 
+                cout<<"NO"<<endl;
         }
     }   
     return 0;

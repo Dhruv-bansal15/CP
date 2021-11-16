@@ -78,10 +78,14 @@ int32_t main(){
         }
         sort(all(arr1));
         sort(all(arr2), greater<int>());
-        looper(i,0,k){
+        int i=0;
+        int cnt=0;
+        while(cnt<k & i<n){
             if(arr2[i]>arr1[i]){
                 arr1[i]= arr2[i];
+                cnt++;
             }
+            i++;
         }
         int ans=0;
         looper(i,0,n){
