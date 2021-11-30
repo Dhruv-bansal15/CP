@@ -66,22 +66,41 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
     
 int32_t main(){
     tester{
-        int n;cin>>n;
-        invi(n);
-        int temp = arr[0];
-        bool done=false;
-        looper(i,1,n){
-            if(arr[i]!=temp){
-                done=true;
+        int n,a,b;cin>>n>>a>>b;
+        int f[n+1]={0};
+        vi left;
+        vi right;
+        left.push_back(a); 
+        f[a]=1;
+        right.push_back(b); 
+        f[b]=1;
+        int m=n/2;
+        for(int i=n;i>=a;i--){
+            if(left.size()==m) 
                 break;
-            }
+            if(f[i]==1) 
+                continue;
+            left.push_back(i);
+            f[i]=1;
         }
-        if(done){
-            cout<<1<<endl;
-        }else{
-            cout<<n<<endl;
+    
+        for(int i=1;i<=b;i++){
+            if(right.size()==m) 
+                break;
+            if(f[i]==1) 
+                continue;
+            right.push_back(i);
+            f[i]=1;
         }
-
+        if(left.size()!=m | right.size()!=m){ 
+            cout<<-1<<endl; 
+            continue; 
+        }
+        for(int x: left) 
+            cout<<x<<" ";
+        for(int x: right) 
+            cout<<x<<" ";
+        cout<<endl;
     }   
     return 0;
 }

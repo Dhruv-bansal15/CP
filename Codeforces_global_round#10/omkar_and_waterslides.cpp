@@ -68,20 +68,12 @@ int32_t main(){
     tester{
         int n;cin>>n;
         invi(n);
-        int temp = arr[0];
-        bool done=false;
+        int ans=0;
         looper(i,1,n){
-            if(arr[i]!=temp){
-                done=true;
-                break;
-            }
+            ans+= max(0ll, arr[i-1]-arr[i]);
         }
-        if(done){
-            cout<<1<<endl;
-        }else{
-            cout<<n<<endl;
-        }
-
+        cout<<ans<<endl;
+        
     }   
     return 0;
 }

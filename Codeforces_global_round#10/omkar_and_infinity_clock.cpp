@@ -63,24 +63,28 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
-    
+
+void solve(vi &arr, int n){
+    int max_ele = *max_element(all(arr));
+    looper(i,0,n){
+        arr[i] = max_ele - arr[i];
+    }
+    return;
+}
 int32_t main(){
     tester{
-        int n;cin>>n;
+        int n,k;cin>>n>>k;
         invi(n);
-        int temp = arr[0];
-        bool done=false;
-        looper(i,1,n){
-            if(arr[i]!=temp){
-                done=true;
-                break;
-            }
-        }
-        if(done){
-            cout<<1<<endl;
+        if(k%2){
+            solve(arr,n);
         }else{
-            cout<<n<<endl;
+            solve(arr,n);
+            solve(arr,n);
         }
+        looper(i,0,n){
+            cout<<arr[i]<<" ";
+        }
+        cout<<endl;
 
     }   
     return 0;

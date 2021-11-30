@@ -66,22 +66,53 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
     
 int32_t main(){
     tester{
-        int n;cin>>n;
-        invi(n);
-        int temp = arr[0];
-        bool done=false;
-        looper(i,1,n){
-            if(arr[i]!=temp){
-                done=true;
-                break;
+        int k,x;cin>>k>>x;
+        int sum = ((k)*(k+1))/2;
+        int ans=0;
+        if(x<sum){
+            int left=1,right=k;
+            while(left<=right){
+                int mid = (left+right)/2;
+                int curr = ((mid)*(mid+1))/2;
+                if(curr>x){
+                    right=mid-1;
+                }else{
+                    ans=mid;
+                    left=mid+1;
+                }
             }
-        }
-        if(done){
-            cout<<1<<endl;
+            if(x>(ans)*(ans+1)/2){
+                ans++;
+            }
+        }else if(sum==x){
+            ans=k;
         }else{
-            cout<<n<<endl;
+            x-= sum;
+            int right=k-1,left=1;
+            // int ans=left;
+            while(left<=right){
+                int mid = (left+right)/2;
+                int curr = 2*(k-1) + (mid-1)*(-1);
+                curr*=mid;curr/=2;
+                if(curr>x){
+                    right=mid-1;
+                }else{
+                    ans=mid;
+                    left=mid+1;
+                }
+            }
+            if(x>(ans*((2*(k-1))+(ans-1)*(-1)))/2){
+                ans++;
+            }
+            ans+=k;
         }
-
+        if(ans>=2*k){
+            ans= 2*k-1;
+        }
+        if(k==1){
+            ans=1;
+        }
+        cout<<ans<<endl;
     }   
     return 0;
 }

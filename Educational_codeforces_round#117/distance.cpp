@@ -66,22 +66,23 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
     
 int32_t main(){
     tester{
-        int n;cin>>n;
-        invi(n);
-        int temp = arr[0];
+        int x,y;cin>>x>>y;
         bool done=false;
-        looper(i,1,n){
-            if(arr[i]!=temp){
-                done=true;
+        looper(i,0,x+1){
+            looper(j,0,y+1){
+                if(abs(x-i) + abs(y-j) == i+j){
+                    done=true;
+                    cout<<i<<" "<<j<<endl;
+                    break;
+                }
+            }
+            if(done){
                 break;
             }
         }
-        if(done){
-            cout<<1<<endl;
-        }else{
-            cout<<n<<endl;
+        if(done==false){
+            cout<<-1<<" "<<-1<<endl;
         }
-
     }   
     return 0;
 }
