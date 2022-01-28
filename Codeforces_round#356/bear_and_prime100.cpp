@@ -65,6 +65,7 @@ bool compare(pair<int,int> &one, pair<int,int> &two){
 }
 vi arr;
 void pre(){
+	
 	looper(i,2,51){
 		int curr=0;
 		looper(j,2,i){
