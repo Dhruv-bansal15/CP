@@ -44,6 +44,7 @@ using namespace std;
 #define looprev(i,a,b) for(int i=a;i>=(b);i--)
 #define logarr(arr,a,b) for(int z=(a);z<=(b);z++) std::cout<<(arr[z])<<space;std::cout<<std::endl;
 #define si set<int>
+int a[200005], suffix_mex[200005];
 int gCd(int a,int b){
     if(b==0)
         return a;
@@ -62,9 +63,6 @@ int nCr(int n,int r){
 bool compare(pair<int,int> &one, pair<int,int> &two){
     return one.second < two.second;
 }
-    
-int a[200001], suf[200001];
- 
 int32_t main()
 {
 	tester{
@@ -76,32 +74,32 @@ int32_t main()
 		looper(i,1,n+1)
 			cin >> a[i];
  
-		for (int i = n; i >= 1; i--){
+		for (int i=n;i>=1;i--){
 			s.erase(a[i]);
-			suf[i] = *s.begin();
+			suffix_mex[i] = *s.begin();
 		}
-		int st = 1;
+		int index = 1;
 		vi ans;
-		while (st <= n){
-			if (suf[st] == 0){
+		while (index <= n){
+			if (suffix_mex[index] == 0){
 				ans.pb(0);
-				st++;
+				index++;
 				continue;
 			}
-			set<int> got;
-			int j = st;
-			while (got.size() < suf[st]){
-				if (a[j] < suf[st])
-					got.insert(a[j]);
+			set<int> temp;
+			int j = index;
+			while (temp.size() < suffix_mex[index]){
+				if (a[j] < suffix_mex[index])
+					temp.insert(a[j]);
 				j++;
 			}
-			ans.pb(suf[st]);
-			st = j;
+			ans.pb(suffix_mex[index]);
+			index = j;
 		}
-		cout << ans.size() << '\n';
+		cout<<ans.size()<<endl;
 		for (int i : ans)
-			cout << i << ' ';
-		cout << '\n';
+			cout<<i<<" ";
+		cout<<endl;
 	}
 	return 0;
 }
